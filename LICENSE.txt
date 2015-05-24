@@ -1,0 +1,15 @@
+pyXRDanalysis
+
+Xray diffraction data analysis package developed for Python 2.7
+
+The package is intended for free use of any X-ray diffraction experts
+and is still under construction.
+
+Patrik Ahvenainen
+patrik.ahvenainen@alumni.helsinki.fi
+
+2015-05-24 --
+
+
+This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. 
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
