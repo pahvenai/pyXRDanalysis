@@ -1,5 +1,8 @@
 __author__ = 'Patrik Ahvenainen'
 
+import numpy as NP
+import scipy as SP
+import matplotlib.pyplot as plt
 
 class Component(object):
     def __init__(self,manufacturer,model='n/a',manufactureYear='',comment=''):
