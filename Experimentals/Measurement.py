@@ -4,6 +4,7 @@ from Experimental import Experimental
 import matplotlib.pyplot as plt
 import os
 import numpy as np
+
 class Measurement(Experimental):
     def __init__(self,scientist,dateRange,supervisor='n/a',institution='n/a',comment=''):
         super.__init__(scientist,dateRange,supervisor,institution,comment)
@@ -11,18 +12,44 @@ class Measurement(Experimental):
 def ReadImage(filepath):
     """
     Reads a 2D scattering image from a file.
-    Supported file types: -
+    Supported file types:
+    .tif / .tiff
+    .rawXXXX / .raw32_XXXX
     """
     fileName, fileExtension = os.path.splitext(filepath)
     fileExtension = fileExtension.lower() # ignore case
 
-    print(fileName,fileExtension)
-
     if fileExtension in ['.tif', '.tiff']:
         return ReadTiffImage(filepath)
+    if fileExtension[0:4] == '.raw':
+        return ReadRawImage(filepath, fileExtension)
 
     raise TypeError('File extension not supported.')
 
 def ReadTiffImage(filepath):
     image = plt.imread(filepath)
     return(np.array(image))
+
+def ReadRawImage(filepath, fileExtension):
+    """
+    Works only for raw files where extensions starts
+    with 'raw' and ends in the size of the data.
+
+    :param filepath: Path to the data file
+    :param fileExtension: The file extension, including a period
+    :return read_data: read image from raw file
+    """
+
+    # Read data size
+    matrix_size = int(fileExtension[-4:])
+    shape = (matrix_size, matrix_size)  # Assume square data matrix
+
+    # Find out bitsize
+    if fileExtension[4:7] == '32_':
+        datatype = np.uint32
+    else:
+        datatype = np.uint16
+
+    filein = open(filepath, 'rb')
+    read_data = np.fromfile(file=filein, dtype=datatype).reshape(shape)
+    return read_data

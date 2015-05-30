@@ -3,7 +3,7 @@ __author__ = 'Patrik Ahvenainen'
 from Experimentals import Measurement
 from Visualization import Basic as vs
 
-image = Measurement.ReadImage('../data/test_image.tif')
+image = Measurement.ReadImage('../data/AgBeh_7min_004.raw32_2300')
 print(image.shape)
 
 vs.plot2Dimage(image)
