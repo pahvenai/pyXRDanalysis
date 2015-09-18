@@ -4,11 +4,22 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 
-def plot2Dimage(image, picker=False, show=True, block=True, clim=None):
+def plot2Dimage(image, picker=False, show=True, block=True, clim=None, alpha=1):
+    """
+    Plots the image as a 2D plot. If the color limits are given, some hopefully useful default limits are calculated and
+    used. This function is intended for basic plotting purposes.
+
+    :param image:
+    :param picker:
+    :param show:
+    :param block:
+    :param clim:
+    :return:
+    """
     #cmap = mpl.colors.Colormap('afmhot', N=512)
     #cmap.set_bad(color=u'k', alpha=None)
 
-    # check the colormap
+    # This code tries to make the default color limits sensible with most scattering data
     if not clim:
         min_val = np.amin(image)
         image_corr = image - min_val + 1
@@ -24,7 +35,7 @@ def plot2Dimage(image, picker=False, show=True, block=True, clim=None):
     else:
         image_corr = np.log(image+1)
 
-    plt.imshow(image_corr, picker=picker, interpolation='none')
+    plt.imshow(image_corr, picker=picker, interpolation='none', alpha=alpha)
 
     # adjust colormap
     plt.hot()

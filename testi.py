@@ -7,11 +7,11 @@ import numpy as np
 
 image = Measurement.ReadImage('../data/tupla_alumiinifolio_15min_003.raw32_2300')
 
-pri = Analysis.findPrimary(image)
+mask = Analysis.createMask(image)
 
-print np.shape(pri)
+print np.shape(mask)
 
-mx = np.ma.array(image, mask=pri)
+mx = np.ma.array(image, mask=mask)
 
 vs.plot2Dimage(mx)
 
