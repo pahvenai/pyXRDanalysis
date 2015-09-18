@@ -5,12 +5,11 @@ from Visualization import Basic as vs
 from Experimentals import Analysis
 import numpy as np
 
-image = Measurement.ReadImage('../data/AgBeh_7min_004.raw32_2300')
-print(image.shape)
+image = Measurement.ReadImage('../data/tupla_alumiinifolio_15min_003.raw32_2300')
 
 pri = Analysis.findPrimary(image)
 
-print np.sum(pri)
+print np.shape(pri)
 
 mx = np.ma.array(image, mask=pri)
 
